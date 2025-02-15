@@ -56,7 +56,8 @@ public class GameActivity extends AppCompatActivity {
     // 新しい目標タイムを設定するメソッド（2回目以降に呼ばれる）
     private void setRandomTargetTime() {
         Random random = new Random();
-        int[] targetTimes = {3000, 5000, 7000, 10000}; // 目標タイム (3秒、5秒、7秒、10秒)
+        int[] targetTimes = {3000};
+        // 目標タイム一旦3秒 (3秒、5秒、7秒、10秒) int[] targetTimes = {3000, 5000, 7000, 10000};
         targetTimeMillis = targetTimes[random.nextInt(targetTimes.length)];
         targetTimeText.setText(String.format("目標タイム: %.3f秒", targetTimeMillis / 1000.0));
     }
@@ -123,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
         // 結果の判定
         long timeDifference = Math.abs(targetTimeMillis - timeElapsedMillis);
 
-        if (timeDifference <= 50) {
+        if (timeDifference < 100) {
             statusMessage.setText("クリア！");
             statusMessage.setTextColor(getResources().getColor(android.R.color.holo_green_dark));  // 緑色で表示
         } else {
